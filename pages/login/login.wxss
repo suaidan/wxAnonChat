@@ -1,0 +1,157 @@
+/* login.wxss */
+@import 'iconfont.wxss'; 
+@font-face {
+  font-family: 'Shrimp';
+  src: url('/fonts/Shrimp.eot');
+  src: local('☺'),
+         url('/fonts/Shrimp.woff') format('woff'),
+         url('/fonts/Shrimp.ttf') format('truetype'),
+         url('/fonts/Shrimp.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.cover {
+  position: absolute;
+  font-family: YouYuan,Serif;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(226, 226, 226, 0.7);
+}
+
+.loginBox {
+  text-align: center;
+  width: 300px;
+  height: 360px;
+  margin: 50px auto 0;
+  background-color: rgba(255, 255, 255, 1);
+  overflow: hidden;
+  border-radius: 7px;
+  box-shadow: 0px 0px 15px 1px #696969;
+}
+
+.logoName {
+  font-family: "Shrimp",YouYuan,Serif;
+  font-size: 24px;
+}
+
+.logoChName {
+  font-family: YouYuan,Serif;
+  font-weight: bold;
+}
+
+.logoImg {
+  width: 101px;
+  height: 128px;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+
+.containLogo {
+  margin: 10px auto 0;
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.form{
+  font-size: 0;
+}
+
+.usrinfo{
+  padding: 5px 20px 5px 30px;
+  width: 180px;
+  margin: 0 auto;
+  display: inline-block;
+  border: rgb(220,230,240) 1px solid;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.nickname {
+
+}
+
+.passwd {
+
+}
+
+.inputView{
+  width: 100%;
+  position: relative;
+  margin: 20px auto;
+}
+
+.usrnameInput {
+
+}
+
+.pwdInput {
+
+}
+
+.warnicon{
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/*控制组件和icon的显示  */
+.hidden{
+  display: none;
+}
+
+.showBlock{
+  display: block;
+}
+
+.showInlineblock{
+  display: inline-block;
+}
+/*占位符的样式  */
+.placeholder{
+  font-family: YouYuan;
+  font-weight: bolder;
+}
+
+.inputNick {
+  font-size: 18px;
+}
+/*提交按钮  */
+.submitBtn{
+  background-color: #0FACF3;
+  color: white;
+  width:230px;
+  font-size: 16px;
+  font-weight: bolder;
+  font-family: YouYuan, Serif;
+  margin-bottom: 20px;
+  padding:6px 0;
+  line-height: 1.4rem;
+}
+
+.webInfo{
+  color:#0FACF3;
+  font-size: 16px;
+  font-weight: bolder;
+  font-family: YouYuan,serif;
+  margin: 30px auto;
+  text-align: center;
+}
+/*警告文字  */
+.warnText{
+  color:red;
+  font-size: 14px;
+  line-height: 0;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+}
+/*输入框被聚焦时的样式  */
+.inputFocus{
+  box-shadow: 0px 0px 8px 1px #0FACF3;
+}
