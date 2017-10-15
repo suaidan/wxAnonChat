@@ -7,26 +7,27 @@
     </view>
     <text class='logoName'>wonder</text>
     <text class="logoChName">の解忧杂货铺</text>
+    <!--输入表单  -->
     <form bindsubmit="login" class='form'>
       <!--用户名输入  -->
       <view class="inputView usernameInput">
         <icon class='iconfont icon-dengluicon'></icon>
         <icon class='warnicon {{className.warnNickName}}' type='warn' color='red' size='16'></icon>
-        <input class="usrinfo nickname {{className.usrfocus}}" data-symbol="usrfocus" bindfocus='inputfocus' bindblur='inputblur' focus='true' placeholder-class='placeholder' placeholder="昵称" name="usrName" type="text" cursor-spacing="100px" />
+        <input name='usr' class="usrinfo nickname {{className.usrfocus}}" data-symbol="usrfocus" maxlength='16' bindfocus='inputfocus' bindblur='inputblur' focus='true' placeholder-class='placeholder' placeholder="昵称"  type="text" cursor-spacing="100px" />
         <text class='warnText'>{{usrWarnText}}</text>
       </view>
       <!--密码输入  -->
       <view class="inputView pwdInput">
         <icon class='iconfont icon-denglumima'></icon>
         <icon class='warnicon {{className.warnPwd}}' type='warn' color='red' size='16'></icon>
-        <input class="usrinfo passwd {{className.pwdfocus}}" data-symbol='pwdfocus' bindfocus='inputfocus' bindblur='inputblur' placeholder-class='placeholder' placeholder="密码" name="pwd" password='true' cursor-spacing="100px" />
+        <input name='pwd' class="usrinfo passwd {{className.pwdfocus}}" data-symbol='pwdfocus' bindfocus='inputfocus' maxlength='16' bindblur='inputblur' placeholder-class='placeholder' placeholder="密码"  password='true' cursor-spacing="100px" />
         <text class='warnText'>{{pwdWarnText}}</text>
       </view>
       <!--密码再次确认  -->
       <view class="inputView {{className.pwdConfirm}}">
         <icon class='iconfont icon-denglumima'></icon>
         <icon class='{{className.warnPwdCon}}' type='warn' color='red' size='16'></icon>
-        <input class="usrinfo passwd {{className.pwdconfocus}}" data-symbol="pwdconfocus" bindfocus='inputfocus' bindblur='inputblur' placeholder-class='placeholder' placeholder="请再次输入密码" name="pwd" password='true' cursor-spacing="100px" />
+        <input name='pwdcon' class="usrinfo passwd {{className.pwdconfocus}}" data-symbol="pwdconfocus" bindfocus='inputfocus' maxlength='16' bindblur='inputblur' placeholder-class='placeholder' placeholder="请再次输入密码"  password='true' cursor-spacing="100px" />
         <text class='warnText'>{{pwdConWarnText}}</text>
       </view>
       <button form-type="submit" class='submitBtn {{className.loginBtn}}'>登录</button>

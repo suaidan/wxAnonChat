@@ -19,7 +19,10 @@ Page({
     pwdWarnText: '', //'密码不正确',
     pwdConWarnText: '', //'密码重复错误'
     bottomText: '忘记密码？',
-    bottomBind: 'forgetPwd'
+    bottomBind: 'forgetPwd',
+    usrok: false,
+    pwdok: false,
+    pwdconok: false
   },
 
   /**
@@ -94,9 +97,10 @@ Page({
       'className.loginBtn': 'hidden',
       'className.pwdConfirm': 'showBlock',
       bottomText: '返回登录',
-      bottomBind: 'bootomBind'
-    })
-    return false;      //第一次点击注册按钮的时候触发的事件，要阻止表单提交。
+      bottomBind: 'bootomBind',
+      usrWarnText: '密码和字符最多16个字符,不包含空格',
+     
+    })     //第一次点击注册按钮的时候触发的事件。
   },
   /**
    * 底部文字绑定的事件（即页面是注册模式时该组件绑定的函数）
@@ -106,7 +110,8 @@ Page({
       'className.loginBtn': 'showBlock',
       'className.pwdConfirm': 'hidden',
       bottomText: '忘记密码？',
-      bottomBind: 'forgetPwd'
+      bottomBind: 'forgetPwd',
+      usrWarnTetx: ''
     })
   },
   /**
@@ -121,20 +126,23 @@ Page({
   inputfocus: function (e) {
     console.log(e.currentTarget.dataset.symbol)
     var temp = e.currentTarget.dataset.symbol;
-    switch(temp){
-      case 'pwdfocus':this.setData({
-        'className.pwdfocus':'inputFocus'
+    this.setData({
+      usrWarnText: ''
+    })
+    switch (temp) {
+      case 'pwdfocus': this.setData({
+        'className.pwdfocus': 'inputFocus'
       });
-      break;
-      case 'usrfocus':this.setData({
-        'className.usrfocus':'inputFocus'
+        break;
+      case 'usrfocus': this.setData({
+        'className.usrfocus': 'inputFocus'
       });
-      break;
-      case 'pwdconfocus':this.setData({
-        'className.pwdconfocus':'inputFocus'
+        break;
+      case 'pwdconfocus': this.setData({
+        'className.pwdconfocus': 'inputFocus'
       });
-      break;
-      default:console.log('warn: data-symbol is worng;'+temp);
+        break;
+      default: console.log('warn: data-symbol is worng;' + temp);
     }
   },
   /**
