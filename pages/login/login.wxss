@@ -92,7 +92,7 @@
 .pwdInput {
 
 }
-
+/*右侧icon的样式  */
 .warnicon{
   position: absolute;
   right: 40px;
@@ -154,4 +154,8 @@
 /*输入框被聚焦时的样式  */
 .inputFocus{
   box-shadow: 0px 0px 8px 1px #0FACF3;
+}
+/*输入错误的时候输入框的颜色  */
+.inputWarn{
+  box-shadow: 0px 0px 8px 1px red;
 }

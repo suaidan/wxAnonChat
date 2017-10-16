@@ -13,7 +13,10 @@ Page({
       loginBtn: 'showBlock',
       pwdfocus: '',
       usrfocus: '',
-      pwdconfocus: ''
+      pwdconfocus: '',
+      inputWarnU: '',
+      inputWarnP: '',
+      inputWarnPC: '',
     },
     usrWarnText: '',  //'用户名已存在',  //在登录的时候为‘该用户不存在’
     pwdWarnText: '', //'密码不正确',
@@ -22,7 +25,18 @@ Page({
     bottomBind: 'forgetPwd',
     usrok: false,
     pwdok: false,
-    pwdconok: false
+    pwdconok: false,
+    autofocus: true,
+    rightIcon:{//输入框右边的icon样式
+      usricon:'',
+      usriconcol:'',
+      pwdicon:'',
+      pwdiconcol:'',
+      pwdconicon:'',
+      pwdconiconcol:''
+    },
+    pwdvalue:'',
+    pwdconvalue:''
   },
 
   /**
@@ -99,7 +113,7 @@ Page({
       bottomText: '返回登录',
       bottomBind: 'bootomBind',
       usrWarnText: '密码和字符最多16个字符,不包含空格',
-     
+      autofocus: true
     })     //第一次点击注册按钮的时候触发的事件。
   },
   /**
@@ -124,7 +138,6 @@ Page({
    * 输入框获得焦点时触发的函数
    */
   inputfocus: function (e) {
-    console.log(e.currentTarget.dataset.symbol)
     var temp = e.currentTarget.dataset.symbol;
     this.setData({
       usrWarnText: ''
@@ -149,19 +162,74 @@ Page({
    * 输入框失去焦点时触发的函数
    */
   inputblur: function (e) {
-    var temp = e.currentTarget.dataset.symbol
+    var temp = e.currentTarget.dataset.symbol;
+    var value = e.detail.value.replace(/\s+/g, '');
+    var reg = /\S{4,16}/g, result = reg.test(value);
+    //当输入框失去焦点的时候更改样式
     switch (temp) {
-      case 'pwdfocus': this.setData({
-        'className.pwdfocus': ''
-      })
-        break;
-      case 'usrfocus': this.setData({
-        'className.usrfocus': ''
+      case 'pwdfocus': this.setData({//密码
+        'className.inputWarnP': 'inputWarn',
+        'className.pwdfocus': '',
+        pwdok: result && (this.data.pwdconvalue ? value === this.data.pwdconvalue:true),
+        pwdvalue:value
       });
+        if (!this.data.pwdok) {//内容检测失败
+          this.setData({
+            'className.warnPwd': 'showBlock',
+            'rightIcon.pwdicon':'warn',
+            'rightIcon.pwdiconcol':'red'
+          })
+        }else{
+          this.setData({//内容检测成功
+            'className.warnPwd': 'showBlock',
+            'rightIcon.pwdicon': 'success',
+            'rightIcon.pwdiconcol': '#59C34B'
+          })
+        }
         break;
-      case 'pwdconfocus': this.setData({
-        'className.pwdconfocus': ''
+      case 'usrfocus': this.setData({//昵称
+        'className.inputWarnU': 'inputWarn',
+        'className.usrfocus': '',
+        usrok: result
       });
+        if (!this.data.usrok) {
+          this.setData({
+            'className.warnNickName': 'showBlock',
+            'rightIcon.usricon':'warn',
+            'rightIcon.usriconcol':'red'
+          })
+        }else{
+          this.setData({
+            'className.warnNickName': 'showBlock',
+            'rightIcon.usricon': 'success',
+            'rightIcon.usriconcol': '#59C34B'
+          })
+        }
+        break;
+      case 'pwdconfocus': this.setData({//确认密码
+        'className.inputWarnPC': 'inputWarn',
+        'className.pwdconfocus': '',
+        pwdconvalue:value,
+        pwdconok: result && (value===this.data.pwdvalue)
+      });
+      console.log(value+'+'+this.data.pwdvalue)
+      console.log((!this.data.pwdconok) || (value !== this.data.pwdvalue))
+
+        if (!this.data.pwdconok) {
+          this.setData({
+            'className.warnPwdCon': 'showBlock',
+            'rightIcon.pwdconicon':'warn',
+            'rightIcon.pwdconiconcol':'red'
+          })
+        }else{
+          
+            this.setData({
+              'className.warnPwdCon': 'showBlock',
+              'rightIcon.pwdconicon': 'success',
+              'rightIcon.pwdconiconcol': '#59C34B'
+            })
+         
+        }
         break;
       default: console.log('warn: data-symbol is worng;' + temp);
     }
