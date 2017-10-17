@@ -5,11 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    className: {
+    mode:0,  //对登录页面和注册页面进行区分，登录页面是0，注册页面是1
+    className: {  //感觉把这写数据写成对象的形式更好，待改进
       warnNickName: 'hidden',
       warnPwd: 'hidden',
-      pwdConfirm: 'hidden',
       warnPwdCon: 'hidden',
+      pwdConfirm: 'hidden',
       loginBtn: 'showBlock',
       pwdfocus: '',
       usrfocus: '',
@@ -35,8 +36,9 @@ Page({
       pwdconicon:'',
       pwdconiconcol:''
     },
-    pwdvalue:'',
-    pwdconvalue:''
+    pwdvalue:'',//密码输入框的值
+    pwdconvalue:'',
+    inputformat:''//输入的格式声明
   },
 
   /**
@@ -107,14 +109,23 @@ Page({
    * 注册按钮绑定的事件
    */
   chooseSignup: function (e) {
-    this.setData({
-      'className.loginBtn': 'hidden',
-      'className.pwdConfirm': 'showBlock',
-      bottomText: '返回登录',
-      bottomBind: 'bootomBind',
-      usrWarnText: '密码和字符最多16个字符,不包含空格',
-      autofocus: true
-    })     //第一次点击注册按钮的时候触发的事件。
+    if(!this.data.mode){
+      this.setData({
+        'className.loginBtn': 'hidden',
+        'className.pwdConfirm': 'showBlock',
+        bottomText: '返回登录',
+        bottomBind: 'bootomBind',
+        inputformat: '密码和字符最多16个字符,不包含空格',
+        autofocus: true,
+        'className.usrfocus': 'inputFocus',
+        'className.inputWarnU': '',
+        'className.warnNickName': 'hidden',
+        mode:1
+      })  
+    }else{
+      console.log("进行注册")
+    }
+       //第一次点击注册按钮的时候触发的事件。
   },
   /**
    * 底部文字绑定的事件（即页面是注册模式时该组件绑定的函数）
@@ -125,7 +136,8 @@ Page({
       'className.pwdConfirm': 'hidden',
       bottomText: '忘记密码？',
       bottomBind: 'forgetPwd',
-      usrWarnTetx: ''
+      inputformat: '',
+      mode:0
     })
   },
   /**
@@ -139,9 +151,9 @@ Page({
    */
   inputfocus: function (e) {
     var temp = e.currentTarget.dataset.symbol;
-    this.setData({
-      usrWarnText: ''
-    })
+    // this.setData({
+    //   usrWarnText: ''
+    // })
     switch (temp) {
       case 'pwdfocus': this.setData({
         'className.pwdfocus': 'inputFocus'
@@ -164,7 +176,7 @@ Page({
   inputblur: function (e) {
     var temp = e.currentTarget.dataset.symbol;
     var value = e.detail.value.replace(/\s+/g, '');
-    var reg = /\S{4,16}/g, result = reg.test(value);
+    var reg = /\S{1,16}/g, result = reg.test(value);
     //当输入框失去焦点的时候更改样式
     switch (temp) {
       case 'pwdfocus': this.setData({//密码
@@ -233,5 +245,16 @@ Page({
         break;
       default: console.log('warn: data-symbol is worng;' + temp);
     }
+  },
+  hideFormattext:function(e){  //隐藏格式说明
+    this.setData({
+      inputformat:''
+    })
+  },
+  removeStyle:function(){ //切换到登录模式的时候移除在注册模式下的样式
+    this.setData({
+        'className.pwdfocus':'',
+
+    })
   }
 })
