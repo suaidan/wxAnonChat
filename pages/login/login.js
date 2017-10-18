@@ -11,6 +11,7 @@ Page({
       text: '忘记密码？',
       bind: 'forgetPwd'
     },
+    inputBlurFun:'inputblur0',
     inputFormat: '',//输入的格式声明
     mode: 0 //对登录页面和注册页面进行区分，登录页面是0，注册页面是1
   },
@@ -97,12 +98,13 @@ Page({
         'pwdcon.display': 'showBlock',
         'bottom.text': '返回登录',
         'bottom.bind': 'bootomBind',
-        inputFormat: '密码和字符4~16位,不包含空格',
+        inputFormat: '密码和字符4-16位,不包含空格',
         'usr.autofocus': true,
         'usr.class.focus': 'inputFocus',
         'usr.class.inputwrong': '',
         'usr.warnicon.display': 'hidden',
-        mode: 1
+        mode: 1,
+        inputBlurFun:'inputblur1'
       })
     } else {
       console.log("进行注册")
@@ -119,7 +121,10 @@ Page({
       'bottom.text': '忘记密码？',
       'bottom.bind': 'forgetPwd',
       inputFormat: '',
-      mode: 0
+      mode: 0,
+      inputBlurFun:'inputblur0',
+      'usr.warnicon.icon':'',
+      'pwd.warnicon.icon':''
     })
   },
   /**
@@ -153,9 +158,58 @@ Page({
     }
   },
   /**
-   * 输入框失去焦点时触发的函数
+   * 输入框失去焦点时触发的函数,分为两种情况，分别为mode等于0和1时的情况
    */
-  inputblur: function (e) {
+  inputblur0: function (e) {
+    var temp = e.currentTarget.dataset.symbol;
+    var value = e.detail.value.replace(/\s+/g, '');
+    var reg = /\S{4,16}/g, result = reg.test(value);
+    //当输入框失去焦点的时候更改样式
+    switch (temp) {
+      case 'pwdfocus': this.setData({//密码
+        'pwd.class.inputwrong': 'inputWarn',
+        'pwd.class.focus': '',
+        'pwd.ok':result,
+        'pwd.value': value
+      });
+        if (!this.data.pwd.ok) {//内容检测失败
+          this.setData({
+            'pwd.warnicon.display': 'showBlock',
+            'pwd.warnicon.icon': 'warn',
+            'pwd.warnicon.color': 'red'
+          })
+        } else {
+          this.setData({//内容检测成功
+            'pwd.warnicon.display': 'hidden'
+            // 'pwd.warnicon.icon': 'success',
+            // 'pwd.warnicon.color': '#59C34B'
+          })
+        }
+        break;
+      case 'usrfocus': this.setData({//昵称
+        'usr.class.inputwrong': 'inputWarn',
+        'usr.class.focus': '',
+        'usr.value':value,
+        'usr.ok': result
+      });
+        if (!this.data.usr.ok) {
+          this.setData({
+            'usr.warnicon.display': 'showBlock',
+            'usr.warnicon.icon': 'warn',
+            'usr.warnicon.color': 'red'
+          })
+        } else {
+          this.setData({
+            'usr.warnicon.display': 'hidden'
+            // 'usr.warnicon.icon': 'success',
+            // 'usr.warnicon.color': '#59C34B'
+          })
+        }
+        break;
+      default: console.log('warn: data-symbol is worng;' + temp);
+    }
+  },
+  inputblur1: function (e) {
     var temp = e.currentTarget.dataset.symbol;
     var value = e.detail.value.replace(/\s+/g, '');
     var reg = /\S{4,16}/g, result = reg.test(value);
