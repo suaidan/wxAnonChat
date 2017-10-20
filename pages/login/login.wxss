@@ -1,5 +1,6 @@
 /* login.wxss */
-@import 'iconfont.wxss'; 
+@import 'iconfont.wxss';
+
 @font-face {
   font-family: 'Shrimp';
   src: url('/fonts/Shrimp.eot');
@@ -13,7 +14,7 @@
 
 .cover {
   position: absolute;
-  font-family: YouYuan,Serif;
+  font-family: YouYuan, Serif;
   top: 0;
   left: 0;
   right: 0;
@@ -31,14 +32,26 @@
   border-radius: 7px;
   box-shadow: 0px 0px 15px 1px #696969;
 }
-
+/* 抖动效果  
+.animate{
+  animation: shake 2s;
+}
+@keyframes shake{
+20% {transform: translateX(-30px);}
+60% {transform: translateX(30px);}
+80% {transform: translateX(-20px);}
+90% {transform: translateX(20px);}
+95% {transform: translateX(-10px);}
+97% {transform: translateX(5px);}
+100% {transform: translateX(0px);}
+} */
 .logoName {
-  font-family: "Shrimp",YouYuan,Serif;
+  font-family: "Shrimp", YouYuan, Serif;
   font-size: 24px;
 }
 
 .logoChName {
-  font-family: YouYuan,Serif;
+  font-family: YouYuan, Serif;
   font-weight: bold;
 }
 
@@ -57,62 +70,54 @@
   border-radius: 50%;
 }
 
-.form{
+.form {
   font-size: 0;
 }
 
-.usrinfo{
+.usrinfo {
   padding: 5px 20px 5px 30px;
   width: 180px;
   margin: 0 auto;
   display: inline-block;
-  border: rgb(220,230,240) 1px solid;
+  border: rgb(220, 230, 240) 1px solid;
   font-size: 16px;
   border-radius: 5px;
 }
-
-.nickname {
-
-}
-
-.passwd {
-
-}
-
-.inputView{
+.inputView {
   width: 100%;
   position: relative;
   margin: 20px auto;
 }
 
 .usrnameInput {
-
 }
 
 .pwdInput {
-
 }
+
 /*右侧icon的样式  */
-.warnicon{
+
+.warnicon {
   position: absolute;
   right: 40px;
   top: 50%;
   transform: translateY(-50%);
 }
-/*控制组件和icon的显示  */
-.hidden{
-  display: none;
-}
 
-.showBlock{
+/*控制组件和icon的显示  */
+
+
+.showBlock {
   display: block;
 }
 
-.showInlineblock{
+.showInlineblock {
   display: inline-block;
 }
+
 /*占位符的样式  */
-.placeholder{
+
+.placeholder {
   font-family: YouYuan;
   font-weight: bolder;
 }
@@ -120,42 +125,144 @@
 .inputNick {
   font-size: 18px;
 }
+
 /*提交按钮  */
-.submitBtn{
-  background-color: #0FACF3;
+
+.submitBtn {
+  background-color: #0facf3;
   color: white;
-  width:230px;
+  width: 230px;
   font-size: 16px;
   font-weight: bolder;
   font-family: YouYuan, Serif;
   margin-bottom: 20px;
-  padding:6px 0;
+  padding: 6px 0;
   line-height: 1.4rem;
 }
 
-.webInfo{
-  color:#0FACF3;
+.webInfo {
+  color: #0facf3;
   font-size: 16px;
   font-weight: bolder;
-  font-family: YouYuan,serif;
+  font-family: YouYuan, serif;
   margin: 30px auto;
   text-align: center;
 }
+
 /*警告文字  */
-.warnText{
-  color:red;
+
+.warnText {
+  color: red;
   font-size: 14px;
   line-height: 0;
   position: absolute;
   bottom: -10px;
+  left: 0;  
+  right: 0;
+  text-align: center;
+}
+
+/*输入框被聚焦时的样式  */
+
+.inputFocus {
+  box-shadow: 0px 0px 8px 1px #0facf3;
+}
+
+/*输入错误的时候输入框的颜色  */
+
+.inputWarn {
+  box-shadow: 0px 0px 8px 1px red;
+}
+
+/*假的按钮  */
+
+.fakeBtn {
+  display: inline-block;
+  border-radius: 5px;
+}
+
+/*填写email的view  */
+
+.signEmail {
+  position: absolute;
+  top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(41,41,41,0.7);
+  border-radius: 7px;
+  z-index: 10; /*这个属性是为了解决覆盖情况下placeholder仍出现在覆盖层上的情况 */
 }
-/*输入框被聚焦时的样式  */
-.inputFocus{
-  box-shadow: 0px 0px 8px 1px #0FACF3;
+/*注册模式下最后的确认模块  */
+.signCon{
+  width: 70vw;
+  height: 40vh;
+  background-color:white;
+  padding: 3vw;
+  border-radius: 3px;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-/*输入错误的时候输入框的颜色  */
-.inputWarn{
-  box-shadow: 0px 0px 8px 1px red;
+
+/* 用户须知 */
+.instruction{
+  font-size: 16px;
+  font-family: YouYuan,Serif;
+  color: gray;
+  font-weight: bolder;
+  line-height: 1.4rem;
+  display: block;
+  padding: 10px;
+  box-shadow: 0px 0px 5px 1px gray inset;
+  border-radius: 5px;
+}
+/*取消按钮  */
+.cancelIcon{
+  align-self: flex-end;
+  height: 0;
+  position: relative;
+  top: -5px;
+  right: -2px;
+}
+/*email输入框  */
+.emailInput{
+  padding: 5px 20px 5px 30px;
+  width: 100%;
+  border: rgb(220, 230, 240) 1px solid;
+  font-size: 16px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 1.93rem;
+  text-align: center;
+}
+/*对确认按钮的底端margin进行修正  */
+.reMargin{
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+/*email输入中包含input的view  */
+.emailContain{
+  position: relative;
+}
+/*email中的检测结果标志  */
+.emailWarn{
+  right: 5px;
+}
+/*蒙版的样式  */
+.corver{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(41,41,41,0.7);
 }

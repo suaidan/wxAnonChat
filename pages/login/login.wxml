@@ -1,7 +1,7 @@
 <!--login.wxml-->
 <view class='cover'>
-  <view class='loginBox'>
-
+  <view class='{{email.display}} corver'></view>
+  <view class='loginBox' animation='{{shake}}'>
     <view class='containLogo'>
       <image class='logoImg' src='../../images/logo.jpg'></image>
     </view>
@@ -13,7 +13,8 @@
       <view class="inputView usernameInput">
         <icon class='iconfont icon-dengluicon'></icon>
         <icon class='warnicon {{usr.warnicon.display}}' type='{{usr.warnicon.icon}}' color='{{usr.warnicon.color}}' size='16'></icon>
-        <input name='usr' class="usrinfo nickname {{usr.class.focus}} {{usr.ok ? '':usr.class.inputwrong}}" data-symbol="usrfocus" maxlength='16' bindinput='hideFormattext' bindfocus='inputfocus' bindblur='{{inputBlurFun}}' focus='{{usr.autofocus}}' placeholder-class='placeholder' placeholder="昵称"  type="text" cursor-spacing="100px" />
+        <input name='usr' class="usrinfo {{usr.class.focus}} {{usr.ok ? '':usr.class.inputwrong}}" data-symbol="usrfocus" maxlength='16' bindinput='hideFormattext' bindfocus='inputfocus' bindblur='{{inputBlurFun}}' focus='{{usr.autofocus}}' placeholder-class='placeholder'
+          placeholder="昵称" type="text" cursor-spacing="100px" />
         <text class='warnText'>{{usr.warntext}}</text>
         <text class='warnText'>{{inputFormat}}</text>
       </view>
@@ -21,21 +22,39 @@
       <view class="inputView pwdInput">
         <icon class='iconfont icon-denglumima'></icon>
         <icon class='warnicon {{pwd.warnicon.display}}' type='{{pwd.warnicon.icon}}' color='{{pwd.warnicon.color}}' size='16'></icon>
-        <input name='pwd' class="usrinfo passwd {{pwd.class.focus}} {{pwd.ok?'':pwd.class.inputwrong}}" data-symbol='pwdfocus' bindfocus='inputfocus' maxlength='16' bindblur='{{inputBlurFun}}' bindinput='hideFormattext' placeholder-class='placeholder' placeholder="密码"  password='true' cursor-spacing="100px" />
+        <input name='pwd' class="usrinfo  {{pwd.class.focus}} {{pwd.ok?'':pwd.class.inputwrong}}" data-symbol='pwdfocus' bindfocus='inputfocus' maxlength='16' bindblur='{{inputBlurFun}}' bindinput='hideFormattext' placeholder-class='placeholder' placeholder="密码"
+          password='true' cursor-spacing="100px" />
         <text class='warnText'>{{pwd.warntext}}</text>
       </view>
       <!--密码再次确认  -->
       <view class="inputView {{pwdcon.display}}">
         <icon class='iconfont icon-denglumima'></icon>
         <icon class='warnicon {{pwdcon.warnicon.display}}' type='{{pwdcon.warnicon.icon}}' color='{{pwdcon.warnicon.color}}' size='16'></icon>
-        <input name='pwdcon' class="usrinfo passwd {{pwdcon.class.focus}} {{pwdcon.ok?'':pwdcon.class.inputwrong}}" data-symbol="pwdconfocus" bindfocus='inputfocus' maxlength='16' bindblur='inputblur1' bindinput='hideFormattext' placeholder-class='placeholder' placeholder="请再次输入密码"  password='true' cursor-spacing="100px" />
-        <text class='warnText'>{{pwdcon.warnText}}</text>
+        <input name='pwdcon' class="usrinfo  {{pwdcon.class.focus}} {{pwdcon.ok?'':pwdcon.class.inputwrong}}" data-symbol="pwdconfocus" bindfocus='inputfocus' maxlength='16' bindblur='inputblur1' bindinput='hideFormattext' placeholder-class='placeholder'
+          placeholder="请再次输入密码" password='true' cursor-spacing="100px" />
+        <text class='warnText'>{{pwdcon.warntext}}</text>
       </view>
       <button form-type="submit" class='submitBtn {{loginBtn}}'>登录</button>
-      <button form-type='submit' bindtap='chooseSignup' class='submitBtn'>注册</button>
+      <text bindtap='chooseSignup' class='submitBtn fakeBtn'>注册</text>
+    <!--邮箱  -->
+      <view class='signEmail {{email.display}}'>
+        <view class='signCon'>
+          <icon class='cancelIcon' bindtap='cancelCon' type='clear' size='25'></icon>
+          <text class='instruction'>用户须知：您可以在这里输入邮箱，用来找回密码。也可以不必填写,但是密码无法找回</text>
+          <view class='emailContain'>
+            <icon class='iconfont icon-mail'></icon>
+            <icon class='warnicon emailWarn {{email.warnicon.display}}' type='{{email.warnicon.icon}}' color='{{email.warnicon.color}}' size='16'></icon>
+            <input name='email' class="emailInput  {{email.class.focus}} {{email.ok?'':email.class.inputwrong}}" data-symbol="emailfocus" bindfocus='inputfocus' maxlength='30' bindblur='inputblur1'  focus='true' placeholder-class='placeholder'
+          placeholder="请输入邮箱"  cursor-spacing="100px" />
+            <!-- <input class='emailInput' name='email' type='text'></input> -->
+            <text class='warnText'>{{email.warntext}}</text>
+          </view>
+          <button class='submitBtn reMargin' form-type='submit'>确认</button>
+        </view>
+      </view>
+
     </form>
   </view>
   <view class='webInfo' bindtap='{{bottom.bind}}'>{{bottom.text}}</view>
-</view>
-
  
+</view>
