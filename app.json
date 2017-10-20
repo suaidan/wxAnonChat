@@ -2,7 +2,8 @@
   "pages": [
     "pages/login/login",
     "pages/message/message",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/init/init"
   ],
   "window": {
     "backgroundTextStyle": "light",
