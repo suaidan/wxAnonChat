@@ -156,7 +156,7 @@
   font-size: 14px;
   line-height: 0;
   position: absolute;
-  bottom: -10px;
+  bottom: -14px;
   left: 0;  
   right: 0;
   text-align: center;
@@ -199,7 +199,7 @@
 /*注册模式下最后的确认模块  */
 .signCon{
   width: 70vw;
-  height: 40vh;
+  height: 60vh;
   background-color:white;
   padding: 3vw;
   border-radius: 3px;
@@ -211,8 +211,8 @@
 
 /* 用户须知 */
 .instruction{
-  font-size: 16px;
-  font-family: YouYuan,Serif;
+  font-size: 12px;
+  font-family: SimSun,Serif;
   color: gray;
   font-weight: bolder;
   line-height: 1.4rem;
@@ -220,14 +220,16 @@
   padding: 10px;
   box-shadow: 0px 0px 5px 1px gray inset;
   border-radius: 5px;
+  overflow: scroll;
+  height: 30vh;
+  margin-top: 3vw;
 }
 /*取消按钮  */
 .cancelIcon{
-  align-self: flex-end;
   height: 0;
-  position: relative;
-  top: -5px;
-  right: -2px;
+  position: absolute;
+  top: -3vw;
+  right: -2vw;
 }
 /*email输入框  */
 .emailInput{
@@ -265,4 +267,14 @@
   right: 0;
   bottom: 0;
   background-color: rgba(41,41,41,0.7);
+}
+/*用户须知四个字的样式  */
+.USK{
+  display:inline-block;
+  width: 100%;
+  text-align: center;
+}
+/*用户须知模块使用的样式  */
+.intrContain{
+  position: relative;
 }

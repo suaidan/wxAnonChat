@@ -39,8 +39,10 @@
     <!--邮箱  -->
       <view class='signEmail {{email.display}}'>
         <view class='signCon'>
+          <view class='intrContain'>
           <icon class='cancelIcon' bindtap='cancelCon' type='clear' size='25'></icon>
-          <text class='instruction'>用户须知：您可以在这里输入邮箱，用来找回密码。也可以不必填写,但是密码无法找回</text>
+          <text class='instruction'><text class='USK'>用户须知</text>\n一、您可以在这里输入邮箱，用来找回密码。也可以不必填写,但是密码无法找回。\n二、本程序仅用作和wonder进行沟通交流，不得用作其他用途，请遵守相关法律，对自己言行负责\n三、因为服务器容量小，所以是随机分配头像，请谅解个人开发的难处（欢迎赞赏ヾ(๑╹◡╹)ﾉ"）\n四、如果您发现了什么问题，欢迎联系我。开发者联系方式：su_pange@163.com。软件所有权归开发者所有</text>
+          </view>
           <view class='emailContain'>
             <icon class='iconfont icon-mail'></icon>
             <icon class='warnicon emailWarn {{email.warnicon.display}}' type='{{email.warnicon.icon}}' color='{{email.warnicon.color}}' size='16'></icon>

@@ -98,9 +98,6 @@ Page({
       }
     }
   },
-  tap: function () {
-    console.log("tap")
-  },
   /**
    * 注册按钮绑定的事件
    */
@@ -120,7 +117,6 @@ Page({
         inputBlurFun: 'inputblur1',
         'usr.warntext':''
       })
-      console.log(this.data.pwdcon.warnicon.display);
     } else {
       if (this.data.usr.ok && this.data.pwd.ok && this.data.pwdcon.ok){
         this.setData({
@@ -235,7 +231,6 @@ Page({
     }
   },
   inputblur1: function (e) {
-    console.log(this.data.pwdcon.warnicon.display);
     var temp = e.currentTarget.dataset.symbol;
     var value = e.detail.value.replace(/\s+/g, '');
     if(temp==='emailfocus'){
@@ -251,7 +246,7 @@ Page({
         'pwd.class.focus': '',
         'pwd.ok': result && (this.data.pwdcon.value ? value === this.data.pwdcon.value : true),
         'pwd.value': value
-      }); console.log(this.data.pwdcon.warnicon.display);
+      }); 
         if (!this.data.pwd.ok) {//内容检测失败
           this.setData({
             'pwd.warnicon.display': 'showBlock',
