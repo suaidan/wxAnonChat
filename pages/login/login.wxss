@@ -156,7 +156,7 @@
   font-size: 14px;
   line-height: 0;
   position: absolute;
-  bottom: -14px;
+  bottom: -10px;
   left: 0;  
   right: 0;
   text-align: center;
@@ -229,7 +229,7 @@
   height: 0;
   position: absolute;
   top: -3vw;
-  right: -2vw;
+  right: -3vw;
 }
 /*email输入框  */
 .emailInput{

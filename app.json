@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/login/login",
-    "pages/message/message",
     "pages/index/index",
+    "pages/message/message",
+    "pages/login/login",
     "pages/init/init"
   ],
   "window": {
