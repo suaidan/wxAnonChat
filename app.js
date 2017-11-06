@@ -2,10 +2,15 @@
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    var timeNow=+new Date();
+    var storTime=wx.getStorageSync("invokeTime")||0;
+    var invoked = wx.getStorageSync('invoked')||false;
+    if(invoked&&(timeNow-storTime<1.8144E10)){
+      wx.setStorageSync("invokTime", Date.now());
+      this.invoked=true;
+    }
   },
+  invoked:false,
   globalData: {
     // peopleId: new Date().getTime(),
     usrname: "",
