@@ -1,36 +1,62 @@
 /**index.wxss**/
-.userItem{
-  height:80rpx;
-  padding:5px 10px;
+
+.userItem {
+  height: 80rpx;
+  padding: 5px 10px;
   display: flex;
-  border-bottom:1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
-.pic image{
-  width:80rpx;
+
+.pic image {
+  width: 80rpx;
   height: 80rpx;
   margin-right: 10px;
 }
-.userItem .name{
+
+.userItem .name {
   font-size: 15px;
-  padding:5px 0;
+  padding: 5px 0;
   font-weight: bold;
-  flex:2;
+  flex: 2;
 }
-.userItem .time{
+
+.userItem .time {
   font-size: 13px;
 }
 
-.message{
+.message {
   color: gray;
-  margin-top:10px;
-}
-.messagetime{
-  color:gray;
-  font-size:13px;
+  margin-top: 10px;
 }
 
-.tips{
-  margin-top:50px;
+.messagetime {
+  color: gray;
+  font-size: 13px;
+}
+
+.tips {
+  margin-top: 50px;
   color: gray;
   text-align: center;
+}
+
+/*底部横条  */
+
+.bottomBar {
+  height: 10vh;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: raw;
+  box-shadow: 0 2px 0px 0px black;
+}
+
+.loginBtn {
+  flex-grow: 1;
+  border-left: 1px solid black;
+}
+
+.mineBtn {
+  flex-grow: 1;
 }
