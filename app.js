@@ -5,7 +5,7 @@ App({
     var timeNow=+new Date();
     var storTime=wx.getStorageSync("invokeTime")||0;
     var invoked = wx.getStorageSync('invoked')||false;
-    if(invoked&&(timeNow-storTime<1.8144E10)){
+    if(invoked&&(timeNow-storTime<1.8144E10)){//在本地存储一个月
       wx.setStorageSync("invokTime", Date.now());
       this.invoked=true;
     }
