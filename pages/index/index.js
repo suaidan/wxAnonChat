@@ -4,6 +4,7 @@ var socket = require('../../utils/socket')
 Page({
     data:{
       invoked:true,
+      netState:app.netState,
       list: [
         {
           id:1,
@@ -41,6 +42,7 @@ Page({
         })
     },
     onLoad(){
+      console.log("index page:"+this.data.netState);
       // socket.initSocket();
       // var that = this;
       // wx.onSocketMessage(function (res) {

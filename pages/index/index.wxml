@@ -1,5 +1,5 @@
  <scroll-view scroll-y="true"> 
-  <view class="tips" wx:if="{{!list.length}}">
+  <view class="tips" wx:if="{{!list.length || !netState}}">
     正在载入聊天列表，请稍候...
   </view>
   <view class="item-avatar-md" wx:for="{{list}}" wx:key="i.id" wx:for-item="i" wx:for-index="index" data-index="{{index}}" data-name="{{i.name}}" data-id="{{i.id}}" bindtap="goPage">
