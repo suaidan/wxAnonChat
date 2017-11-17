@@ -5,7 +5,7 @@ App({
     wx.connectSocket({
       url: 'ws://127.0.0.1:8000',
     })
-    wx.onSocketOpen(function(res){
+    wx.onSocketOpen(function(res){ 
       if(token){
         wx.sendSocketMessage({
           data: token,
@@ -15,6 +15,11 @@ App({
           data: "notoken"
         })
       }
+    })
+    wx.onSocketError(function(res){
+      var app=getApp();
+      app.netState=false;
+      console.log("websocket 打开失败" + this);
     })
     wx.onSocketMessage(function(res){
       if(res.ok){
@@ -30,6 +35,11 @@ App({
       this.invoked=true;
     }
   },
+  onShow:function(){
+    this.netState=false;
+    console.log(this);
+  },
+  netState:true,
   invoked:false,
   globalData: {
     // peopleId: new Date().getTime(),
