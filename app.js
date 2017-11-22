@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    this.getUserInfo();
     var token=wx.getStorageSync("token")||"";
     wx.connectSocket({
       url: 'ws://127.0.0.1:8000',
@@ -8,21 +9,22 @@ App({
     wx.onSocketOpen(function(res){ 
       if(token){
         wx.sendSocketMessage({
-          data: token,
+          data: JSON.stringify({ "token": token, name: this.globalData.usrname })
         })
       }else{
         wx.sendSocketMessage({
-          data: "notoken"
+          data: JSON.stringify({ "token": "notoken", name: this.globalData.usrname })
         })
       }
     })
     wx.onSocketError(function(res){
       var app=getApp();
       app.netState=false;
-      console.log("websocket 打开失败" + this);
+      console.log("websocket 打开失败");
     })
     wx.onSocketMessage(function(res){
-      if(res.ok){
+      if(res){
+        console.log(res.toString());
         //后台判断token有效,然后分为长期有效还是临时的，再采取相应的办法
       }
     })
@@ -51,9 +53,7 @@ App({
     wx.getStorage({//获取微信用户名
       key: 'userWxName',
       success: function(res) {
-        console.log(res.data);
-        console.log(app);
-        app.globalData.usrname=res.data;
+        app.globalData.usrname=res.data;//!!!!这里有错误
         return;
       },
       fail:function(){
@@ -75,7 +75,6 @@ App({
           },
           complete: function (res) {
             console.log("get user's information finished");
-            console.log(res);
           }
         })
       }
