@@ -2,61 +2,65 @@
 App({
   onLaunch: function () {
     this.getUserInfo();
-    var token=wx.getStorageSync("token")||"";
+    var token = wx.getStorageSync("token") || "";
     wx.connectSocket({
       url: 'ws://127.0.0.1:8000',
     })
-    wx.onSocketOpen(function(res){ 
-      if(token){
+    var app = this;
+    wx.onSocketOpen(function (res) {
+      if (token) {
         wx.sendSocketMessage({
-          data: JSON.stringify({ "token": token, name: this.globalData.usrname })
+          data: JSON.stringify({ "token": token, name: app.globalData.usrname })
         })
-      }else{
+      } else {
         wx.sendSocketMessage({
-          data: JSON.stringify({ "token": "notoken", name: this.globalData.usrname })
+          data: JSON.stringify({ "token": "notoken", name: app.globalData.usrname })
         })
       }
     })
-    wx.onSocketError(function(res){
-      var app=getApp();
-      app.netState=false;
+    wx.onSocketError(function (res) {
+      app.netState = false;
       console.log("websocket 打开失败");
     })
-    wx.onSocketMessage(function(res){
-      if(res){
-        console.log(res.toString());
-        //后台判断token有效,然后分为长期有效还是临时的，再采取相应的办法
+    wx.onSocketMessage(function (res) {
+      var resData=JSON.parse(res.data);
+      if(resData.token){
+       wx.setStorage({
+         key: 'token',
+         data: resData.token
+       })
       }
+      console.log(resData);
+      //后台判断token有效,然后分为长期有效还是临时的，再采取相应的办法
+
     })
     //调用API从本地缓存中获取数据
-    var timeNow=+new Date();  
-    var storTime=wx.getStorageSync("invokeTime")||0;
-    var invoked = wx.getStorageSync('invoked')||false;
-    if(invoked&&(timeNow-storTime<1.8144E10)){//在本地存储一个月
+    var timeNow = +new Date();
+    var storTime = wx.getStorageSync("invokeTime") || 0;
+    var invoked = wx.getStorageSync('invoked') || false;
+    if (invoked && (timeNow - storTime < 1.8144E10)) {//在本地存储一个月
       wx.setStorageSync("invokTime", Date.now());
-      this.invoked=true;
+      this.invoked = true;
     }
   },
-  onShow:function(){
-    this.netState=false;
-    console.log(this);
+  onShow: function () {
+    this.netState = false;
   },
-  netState:true,
-  invoked:false,
+  netState: true,
+  invoked: false,
   globalData: {
     // peopleId: new Date().getTime(),
     usrname: "",
     userInfo: {}
   },
-  getUserInfo:function(){
-    var app=getApp();
+  getUserInfo: function () {
+    var app = this;
     wx.getStorage({//获取微信用户名
       key: 'userWxName',
-      success: function(res) {
-        app.globalData.usrname=res.data;//!!!!这里有错误
-        return;
+      success: function (res) {
+        app.globalData.usrname = res.data;
       },
-      fail:function(){
+      fail: function () {
         wx.getUserInfo({
           success: function (res) {
             var userInfo = res.userInfo;
@@ -79,6 +83,6 @@ App({
         })
       }
     })
-    
+
   }
 })
