@@ -7,14 +7,18 @@ App({
       url: 'ws://127.0.0.1:8000',
     })
     var app = this;
+    // console.log(this)
+    // console.log("name is"+this.globalData.usrname)不知道为什么为空？
+    var usrname = wx.getStorageSync("userWxName")
+    console.log(usrname);
     wx.onSocketOpen(function (res) {
       if (token) {
         wx.sendSocketMessage({
-          data: JSON.stringify({ "token": token, name: app.globalData.usrname })
+          data: JSON.stringify({ "token": token, name: usrname })
         })
       } else {
         wx.sendSocketMessage({
-          data: JSON.stringify({ "token": "notoken", name: app.globalData.usrname })
+          data: JSON.stringify({ "token": "notoken", name: usrname })
         })
       }
     })
@@ -59,6 +63,7 @@ App({
       key: 'userWxName',
       success: function (res) {
         app.globalData.usrname = res.data;
+        console.log("2name is" + app.globalData.usrname)
       },
       fail: function () {
         wx.getUserInfo({
