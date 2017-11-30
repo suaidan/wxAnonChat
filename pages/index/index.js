@@ -3,7 +3,7 @@ import { formatTime } from '../../utils/util'
 var socket = require('../../utils/socket')
 Page({
     data:{
-      invoked:true,
+      invoked:app.invoke,
       netState:app.netState,
       list: [
         {
