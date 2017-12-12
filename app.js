@@ -14,11 +14,11 @@ App({
     wx.onSocketOpen(function (res) {
       if (token) {
         wx.sendSocketMessage({
-          data: JSON.stringify({ "token": token, name: usrname })
+          data: JSON.stringify({ "token": token,"type":"token", name: usrname })
         })
       } else {
         wx.sendSocketMessage({
-          data: JSON.stringify({ "token": "notoken", name: usrname })
+          data: JSON.stringify({ "token": "notoken","type":"token", name: usrname })
         })
       }
     })
