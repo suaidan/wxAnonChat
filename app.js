@@ -1,6 +1,19 @@
 //app.js
 App({
   onLaunch: function () {
+    wx.login({
+      timeout: 10000,
+      success: function (res) {
+        if(res.code){
+          wx.request({
+            url: 'ws://127.0.0.1:8000',
+            data:res.code
+          })
+        }else{
+          console.log("登录失败"+res.errMsg);
+        }
+      }
+    });
     this.getUserInfo();
     var token = wx.getStorageSync("token") || "";
     wx.connectSocket({
@@ -14,11 +27,11 @@ App({
     wx.onSocketOpen(function (res) {
       if (token) {
         wx.sendSocketMessage({
-          data: JSON.stringify({ "token": token,"type":"token", name: usrname })
+          data: JSON.stringify({ "token": token, "type": "token", name: usrname })
         })
       } else {
         wx.sendSocketMessage({
-          data: JSON.stringify({ "token": "notoken","type":"token", name: usrname })
+          data: JSON.stringify({ "token": "notoken", "type": "token", name: usrname })
         })
       }
     })
@@ -27,12 +40,12 @@ App({
       console.log("websocket 打开失败");
     })
     wx.onSocketMessage(function (res) {
-      var resData=JSON.parse(res.data);
-      if(resData.token){
-       wx.setStorage({
-         key: 'token',
-         data: resData.token
-       })
+      var resData = JSON.parse(res.data);
+      if (resData.token) {
+        wx.setStorage({
+          key: 'token',
+          data: resData.token
+        })
       }
       console.log(resData);
       //后台判断token有效,然后分为长期有效还是临时的，再采取相应的办法
